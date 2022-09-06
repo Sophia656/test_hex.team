@@ -10,8 +10,8 @@ const RegisterPage = () => {
 
     return (
         <RegisterWrapper>
-            <Modal title='РЕГЕСТРАЦИЯ' username={username} setUsername={setUsername} password={password} setPassword={setPassword} btnText='ЗАРЕГЕСТРИРОВАТЬСЯ' />
-            <Button onClick={() => setAuth(false)}>ЗАРЕГЕСТРИРОВАННЫ? ВОЙТИ!</Button>
+            <Modal title='РЕГИСТРАЦИЯ' username={username} setUsername={setUsername} password={password} setPassword={setPassword} btnText='ЗАРЕГИСТРИРОВАТЬСЯ' />
+            <Button onClick={() => setAuth(false)}>ЗАРЕГИСТРИРОВАННЫ? ВОЙТИ!</Button>
             {authError && <ErrorPopup>{authError}</ErrorPopup>}            
         </RegisterWrapper>
     );

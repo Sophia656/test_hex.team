@@ -1,25 +1,25 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { CellName, TableContentWrapper, TableCounter, TableLink, TableNames, TableRow, TableWrapper } from './styled';
 
-const Table = ({allLinksInfo, setAllLinksInfo}) => {
+const Table = ({currentPageLinks, setCurrentPageLinks}) => {
     const [sortByLong, setSortByLong] = useState(false)
     const [sortByShort, setSortByShort] = useState(false)
     const [sortByCounter, setSortByCounter] = useState(false)
 
     const sortArr = useCallback(() => {
         if (sortByCounter) {
-            setAllLinksInfo(allLinksInfo.sort((a, b) => a.counter - b.counter))
+            setCurrentPageLinks(currentPageLinks.sort((a, b) => a.counter - b.counter))
             return setSortByCounter(false)
         }
         if (sortByLong) {
-            setAllLinksInfo(allLinksInfo.sort((a, b) => a.long.localeCompare(b.long)))
+            setCurrentPageLinks(currentPageLinks.sort((a, b) => a.long.localeCompare(b.long)))
             return setSortByLong(false)
         }
         if (sortByShort) {
-            setAllLinksInfo(allLinksInfo.sort((a, b) => a.short.localeCompare(b.short)))
+            setCurrentPageLinks(currentPageLinks.sort((a, b) => a.short.localeCompare(b.short)))
             return setSortByShort(false)
         }
-    }, [sortByCounter, sortByLong, sortByShort, allLinksInfo])
+    }, [sortByCounter, sortByLong, sortByShort, currentPageLinks])
 
     useEffect(() => {
         if (sortByCounter || sortByLong || sortByShort) {
@@ -41,7 +41,7 @@ const Table = ({allLinksInfo, setAllLinksInfo}) => {
                 </CellName>
             </TableNames>
             <TableContentWrapper>
-                {allLinksInfo.map(info =>
+                {currentPageLinks.map(info =>
                     <TableRow key={info.id}>
                         <TableLink href={info.long}>{info.long}</TableLink>
                         <TableLink href={info.short}>{info.short}</TableLink>

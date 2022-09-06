@@ -43,7 +43,7 @@ export const CellName = styled.div`
 export const TableRow = styled.div`
     display: flex;
     width: inherit;
-    height: fit-content;
+    height: inherit;
 `
 export const TableLink = styled.a`
     display: flex;

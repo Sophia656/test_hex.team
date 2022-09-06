@@ -9,7 +9,8 @@ export const ErrorWrapper = styled.div`
     padding: 1vh 2vw;
     border-radius: 4vw;
     border: 1px solid white;
-    background: gray;
+    background: brown;
     font-size: 1.2rem;
+    color: white;
     margin-top: 1vh;
 `

@@ -11,7 +11,7 @@ const LoginPage = () => {
     return (
         <LoginWrapper>
             <Modal title='ВХОД' username={username} setUsername={setUsername} password={password} setPassword={setPassword} btnText='ВОЙТИ' />
-            <Button onClick={() => setAuth(true)}>НЕ ЗАРЕГЕСТРИРОВАННЫ? ЗАРЕГЕСТРИРОВАТЬСЯ!</Button>
+            <Button onClick={() => setAuth(true)}>НЕ ЗАРЕГЕСТРИРОВАННЫ? ЗАРЕГИСТРИРОВАТЬСЯ!</Button>
             {loginError && <ErrorPopup>{loginError}</ErrorPopup>}
         </LoginWrapper>
     );
