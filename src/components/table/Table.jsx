@@ -2,11 +2,30 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { CellName, TableContentWrapper, TableCounter, TableLink, TableNames, TableRow, TableWrapper } from './styled';
 
 const Table = ({allLinksInfo, setAllLinksInfo}) => {
-    const [currentArray, setCurrentArray] = useState(allLinksInfo)
     const [sortByLong, setSortByLong] = useState(false)
     const [sortByShort, setSortByShort] = useState(false)
     const [sortByCounter, setSortByCounter] = useState(false)
 
+    const sortArr = useCallback(() => {
+        if (sortByCounter) {
+            setAllLinksInfo(allLinksInfo.sort((a, b) => a.counter - b.counter))
+            return setSortByCounter(false)
+        }
+        if (sortByLong) {
+            setAllLinksInfo(allLinksInfo.sort((a, b) => a.long.localeCompare(b.long)))
+            return setSortByLong(false)
+        }
+        if (sortByShort) {
+            setAllLinksInfo(allLinksInfo.sort((a, b) => a.short.localeCompare(b.short)))
+            return setSortByShort(false)
+        }
+    }, [sortByCounter, sortByLong, sortByShort, allLinksInfo])
+
+    useEffect(() => {
+        if (sortByCounter || sortByLong || sortByShort) {
+            sortArr()
+        }
+    }, [sortByCounter, sortByLong, sortByShort])
 
     return (
         <TableWrapper>
