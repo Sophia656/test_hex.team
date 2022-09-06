@@ -64,8 +64,6 @@ const App = () => {
       }
     }
 
-    console.log(token)
-
   return (
     <AuthContext.Provider value={{
       auth,
@@ -78,7 +76,7 @@ const App = () => {
       setUsername,
       password,
       setPassword,
-
+      token
     }}>
     <>
       {showMain
