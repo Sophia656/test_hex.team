@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/test_hex.team/static/css/main.35c7bb79.css",
-    "main.js": "/test_hex.team/static/js/main.2d21cbc3.js",
+    "main.js": "/test_hex.team/static/js/main.a1ff1139.js",
     "index.html": "/test_hex.team/index.html",
     "main.35c7bb79.css.map": "/test_hex.team/static/css/main.35c7bb79.css.map",
-    "main.2d21cbc3.js.map": "/test_hex.team/static/js/main.2d21cbc3.js.map"
+    "main.a1ff1139.js.map": "/test_hex.team/static/js/main.a1ff1139.js.map"
   },
   "entrypoints": [
     "static/css/main.35c7bb79.css",
-    "static/js/main.2d21cbc3.js"
+    "static/js/main.a1ff1139.js"
   ]
 }
