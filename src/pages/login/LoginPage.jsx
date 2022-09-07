@@ -6,12 +6,12 @@ import { AuthContext } from '../../context';
 import { LoginWrapper } from './styled';
 
 const LoginPage = () => {
-    const {setAuth, setUsername, username, setPassword, password, loginError} = useContext(AuthContext)
+    const {setRegister, setUsername, username, setPassword, password, loginError} = useContext(AuthContext)
 
     return (
         <LoginWrapper>
             <Modal title='ВХОД' username={username} setUsername={setUsername} password={password} setPassword={setPassword} btnText='ВОЙТИ' />
-            <Button onClick={() => setAuth(true)}>НЕ ЗАРЕГЕСТРИРОВАННЫ? ЗАРЕГИСТРИРОВАТЬСЯ!</Button>
+            <Button onClick={() => setRegister(true)}>НЕ ЗАРЕГЕСТРИРОВАННЫ? ЗАРЕГИСТРИРОВАТЬСЯ!</Button>
             {loginError && <ErrorPopup>{loginError}</ErrorPopup>}
         </LoginWrapper>
     );

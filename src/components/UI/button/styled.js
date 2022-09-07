@@ -11,7 +11,7 @@ export const Btn = styled.button`
     background: brown;
     font-size: 1rem;
     color: white;
-    margin-top: 1vh;
+    margin: 1vh;
     padding: 1vh 1vw;
     transition-duration: 1s;
     transition-timing-function: easy-in-out;

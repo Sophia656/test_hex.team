@@ -6,12 +6,12 @@ import { AuthContext } from '../../context';
 import { RegisterWrapper } from './styled';
 
 const RegisterPage = () => {
-    const {setAuth, setUsername, username, setPassword, password, authError} = useContext(AuthContext)
+    const {setRegister, setUsername, username, setPassword, password, authError} = useContext(AuthContext)
 
     return (
         <RegisterWrapper>
             <Modal title='РЕГИСТРАЦИЯ' username={username} setUsername={setUsername} password={password} setPassword={setPassword} btnText='ЗАРЕГИСТРИРОВАТЬСЯ' />
-            <Button onClick={() => setAuth(false)}>ЗАРЕГИСТРИРОВАННЫ? ВОЙТИ!</Button>
+            <Button onClick={() => setRegister(false)}>ЗАРЕГИСТРИРОВАННЫ? ВОЙТИ!</Button>
             {authError && <ErrorPopup>{authError}</ErrorPopup>}            
         </RegisterWrapper>
     );

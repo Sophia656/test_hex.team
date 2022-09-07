@@ -1,21 +1,22 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthContext } from './context';
+import { useLocalStorage } from './hooks/useLocalStorage';
 import LoginPage from './pages/login/LoginPage';
 import MainPage from './pages/main/MainPage';
 import RegisterPage from './pages/registration/RegisterPage';
 
 
 const App = () => {
-  // вход
-  const [showMain, setShowMain] = useState(false)
+  // для того чтобы не выбрасывало на вход - сохраняем в локалсторадже то что пользователь вошел
+  const [isAuth, setIsAuth] = useLocalStorage('auth', false)
   // регистрация или вход
-  const [auth, setAuth] = useState(true)
+  const [register, setRegister] = useState(true)
   // для инпутов
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   // сохраняем тек токен
-  const [token, setToken] = useState('')
+  const [token, setToken] = useLocalStorage('token', '')
   // для тек ошибки входа
   const [authError, setAuthError] = useState('')
   const [loginError, setLoginError] = useState('')
@@ -32,7 +33,8 @@ const App = () => {
           })
           .then(response => {
               setToken(response.data.access_token)
-              setShowMain(true)
+              setUsername('')
+              setPassword('')
           })
           .catch(error => {
             setLoginError('Неверный логин или пароль!')
@@ -53,7 +55,6 @@ const App = () => {
         .then(response => {
           if (response.status === 200) {
             loginUser()
-            setShowMain(true)
           }
         })
         .catch(error => {
@@ -62,12 +63,22 @@ const App = () => {
       } else {
         setAuthError('Введите данные!')
       }
+  }
+
+  // только если мы получили токен
+  useEffect(() => {
+    if (token !== '') {
+      setIsAuth(true)
+    } else {
+      setIsAuth(false)
+      localStorage.clear()
     }
+  }, [token])
 
   return (
     <AuthContext.Provider value={{
-      auth,
-      setAuth,
+      register,
+      setRegister,
       authUser,
       loginUser,
       authError,
@@ -76,15 +87,17 @@ const App = () => {
       setUsername,
       password,
       setPassword,
-      token
+      token,
+      isAuth,
+      setIsAuth,
+      setToken
     }}>
-    <>
-      {showMain
+      {isAuth
       ?
       <MainPage />
       :
       <>
-        {auth
+        {register
           ?
           <RegisterPage />
           :
@@ -92,8 +105,6 @@ const App = () => {
           }
       </>
       }
-      
-    </>
     </AuthContext.Provider>
   );
 };
