@@ -25,11 +25,12 @@ const MainPage = () => {
     async function getAllCurrentPages() {
         await axios({
             method: 'GET',
-            url: 'http://79.143.31.216/statistics',
+            url: 'https://79.143.31.216/statistics',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`,
+                'access-control-allow-origin': '*'
             },
             params: {order: 'asc_short', offset: '0', limit: '0'}
         })
@@ -55,11 +56,12 @@ const MainPage = () => {
         }
         await axios({
             method: 'GET',
-            url: 'http://79.143.31.216/statistics',
+            url: 'https://79.143.31.216/statistics',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`,
+                'access-control-allow-origin': '*'
             },
             params: {order: 'asc_short', offset: offset, limit: limit}
         })
@@ -93,11 +95,12 @@ const MainPage = () => {
         if (longLink) {
             await axios({
                 method: 'POST',
-                url: 'http://79.143.31.216/squeeze',
+                url: 'https://79.143.31.216/squeeze',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
+                    'access-control-allow-origin': '*'
                 },
                 params: {link: longLink}
             })
