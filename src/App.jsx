@@ -11,7 +11,7 @@ const App = () => {
   // для того чтобы не выбрасывало на вход - сохраняем в локалсторадже то что пользователь вошел
   const [isAuth, setIsAuth] = useLocalStorage('auth', false)
   // регистрация или вход
-  const [register, setRegister] = useState(true)
+  const [register, setRegister] = useState(false)
   // для инпутов
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -92,19 +92,16 @@ const App = () => {
       setIsAuth,
       setToken
     }}>
-      {isAuth
-      ?
-      <MainPage />
-      :
-      <>
-        {register
-          ?
-          <RegisterPage />
-          :
-          <LoginPage />
-          }
-      </>
-      }
+        {isAuth
+        ?
+        <MainPage />
+        :
+        register
+        ?
+        <RegisterPage />
+        :
+        <LoginPage />
+        }
     </AuthContext.Provider>
   );
 };

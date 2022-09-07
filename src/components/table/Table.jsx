@@ -44,7 +44,7 @@ const Table = ({currentPageLinks, setCurrentPageLinks}) => {
                 {currentPageLinks.map(info =>
                     <TableRow key={info.id}>
                         <TableLink href={info.long}>{info.long}</TableLink>
-                        <TableLink href={info.short}>{info.short}</TableLink>
+                        <TableLink onClick={() => {navigator.clipboard.writeText(this.state.textToCopy)}} href={info.short}>{info.short}</TableLink>
                         <TableCounter>{info.counter}</TableCounter>
                     </TableRow>
                 )}

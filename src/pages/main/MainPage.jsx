@@ -64,7 +64,6 @@ const MainPage = () => {
             params: {order: 'asc_short', offset: offset, limit: limit}
         })
         .then(response => {
-            console.log('RESPONSE', response.data)
             const getlinks = []
             for (let i = 0; i < response.data.length; i++) {
                 getlinks.push({long: response.data[i].target, short: `http://79.143.31.216/s/${response.data[i].short}`, counter: response.data[i].counter, id: response.data[i].id})
@@ -117,7 +116,9 @@ const MainPage = () => {
 
     return (
         <MainWrapper>
-            <Button onClick={() => logout()} style={{position: 'absolute', top: 0, right: 10}}>EXIT</Button>
+                <Button onClick={() => logout()} style={{position: 'absolute', top: 0, right: 10}}>
+                    EXIT
+                </Button>
             <MainForm>
                 <Input type="text" placeholder="Вставьте ссылку..." value={longLink} onChange={e => setLongLink(e.target.value)} />
                 <Button onClick={e => squeeze(e)}>КОНВЕРТИРОВАТЬ</Button>

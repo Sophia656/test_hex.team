@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Modal from '../../components/modal/Modal';
 import Button from '../../components/UI/button/Button';
 import ErrorPopup from '../../components/UI/error-popup/ErrorPopup';
