@@ -28,7 +28,7 @@ const App = () => {
               headers: {
                   'Accept': 'application/json',
                   'Content-Type': 'application/x-www-form-urlencoded',
-                  'access-control-allow-origin': '*'
+                  'access-control-allow-origin': 'interest-cohort'
               },
               data: { 'grand-type': `grant_type=&username=${username}&password=${password}&scope=&client_id=&client_secret=`},
           })
@@ -50,7 +50,7 @@ const App = () => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'access-control-allow-origin': '*'
+                'access-control-allow-origin': 'interest-cohort'
             },
             params: {username: username, password: password}
         })

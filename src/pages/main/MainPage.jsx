@@ -30,7 +30,7 @@ const MainPage = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
-                'access-control-allow-origin': '*'
+                'access-control-allow-origin': 'interest-cohort'
             },
             params: {order: 'asc_short', offset: '0', limit: '0'}
         })
@@ -61,7 +61,7 @@ const MainPage = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
-                'access-control-allow-origin': '*'
+                'access-control-allow-origin': 'interest-cohort'
             },
             params: {order: 'asc_short', offset: offset, limit: limit}
         })
@@ -100,7 +100,7 @@ const MainPage = () => {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
-                    'access-control-allow-origin': '*'
+                    'access-control-allow-origin': 'interest-cohort'
                 },
                 params: {link: longLink}
             })
