@@ -24,11 +24,10 @@ const App = () => {
   const loginUser = async () => {
       await axios({
               method: 'POST',
-              url: 'https://79.143.31.216/login',
+              url: 'http://79.143.31.216/login',
               headers: {
                   'Accept': 'application/json',
-                  'Content-Type': 'application/x-www-form-urlencoded',
-                  'access-control-allow-origin': 'interest-cohort'
+                  'Content-Type': 'application/x-www-form-urlencoded'
               },
               data: { 'grand-type': `grant_type=&username=${username}&password=${password}&scope=&client_id=&client_secret=`},
           })
@@ -46,11 +45,10 @@ const App = () => {
     if (username && password) {
       await axios({
             method: 'POST',
-            url: 'https://79.143.31.216/register',
+            url: 'http://79.143.31.216/register',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'access-control-allow-origin': 'interest-cohort'
+                'Content-Type': 'application/json'
             },
             params: {username: username, password: password}
         })
