@@ -4,7 +4,7 @@ export const ErrorWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 4vh;
+    height: 5vh;
     width: fit-content;
     padding: 1vh 2vw;
     border-radius: 4vw;
@@ -12,5 +12,5 @@ export const ErrorWrapper = styled.div`
     background: brown;
     font-size: 1.2rem;
     color: white;
-    margin-top: 1vh;
+    margin-top: 0.5vh;
 `

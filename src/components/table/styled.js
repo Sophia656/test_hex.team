@@ -1,14 +1,16 @@
 import styled from 'styled-components'
+import { PRIMARY_BACK, PRIMARY_BTN, PRIMARY_INPUT, PRIMARY_MAIN, SECONDARY_BACK } from '../../styles'
 
 
 export const TableWrapper = styled.div`
     width: 100vw;
+    color: ${PRIMARY_BACK};
 `
 
 export const TableContentWrapper = styled.div`
     width: 100vw;
     height: 70vh;
-    background: gray;
+    background: ${SECONDARY_BACK};
     display: flex;
     flex-direction: column;
     overflow: scroll;
@@ -17,7 +19,7 @@ export const TableNames = styled.div`
     display: flex;
     width: 100vw;
     height: 6vh;
-    background: pink;
+    background: ${PRIMARY_BTN};
     cursor: pointer;
 `
 
@@ -36,7 +38,8 @@ export const CellName = styled.div`
         border-right: none;
     }
     &:hover {
-        background: brown;
+        background: ${PRIMARY_INPUT};
+        color: ${PRIMARY_MAIN};
     }
 `
 
@@ -52,6 +55,7 @@ export const TableLink = styled.a`
     width: inherit;
     min-height: 5vh;
     position: relative;
+    color: ${PRIMARY_MAIN};
     padding: 1vw;
     align-items: center;
     text-decoration: underline;
@@ -59,7 +63,7 @@ export const TableLink = styled.a`
         border-left: none;
     }
     &:hover {
-        color: pink;
+        color: ${PRIMARY_INPUT};
     }
 `
 
@@ -73,4 +77,5 @@ export const TableCounter = styled.div`
     padding: 1vw;
     align-items: center;
     border-right: none;
+    color: ${PRIMARY_MAIN};
 `

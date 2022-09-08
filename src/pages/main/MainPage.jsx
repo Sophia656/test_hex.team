@@ -15,7 +15,7 @@ const MainPage = () => {
     const [longLink, setLongLink] = useState('')
     const [allLinks, setAllLinks] = useState([])
     const [currentPageLinks, setCurrentPageLinks] = useState([])
-    const [limit, setLimit] = useState(5);
+    const [limit, setLimit] = useLocalStorage('limit', 5);
     const [page, setPage] = useLocalStorage('page', 1);
     const [allPages, setAllPages] = useState(0)
     const [changePage, setChangePage] = useState(false)

@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '../UI/button/Button';
 
 const Pagination = ({allPages, page, setPage, setChangePage}) => {
-
     const pagesArray = []
 
     for (let i = 1; i <= allPages; i++) {
@@ -20,6 +19,7 @@ const Pagination = ({allPages, page, setPage, setChangePage}) => {
                 <Button 
                     onClick={() => handleChangePage(p)}
                     key={p}
+                    active={page == p}
                 >
                 {p}
                 </Button>  

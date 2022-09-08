@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { PRIMARY_MAIN } from '../../styles'
 
 export const RegisterWrapper = styled.form`
     display: flex;
@@ -7,5 +8,5 @@ export const RegisterWrapper = styled.form`
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    background: brown;
+    background: ${PRIMARY_MAIN};
 `

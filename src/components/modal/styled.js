@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { PRIMARY_BACK, PRIMARY_MAIN } from '../../styles'
 
 export const ModalWrapper = styled.div`
     display: flex;
@@ -7,18 +8,10 @@ export const ModalWrapper = styled.div`
     justify-content: space-evenly;
     width: 30vw;
     height: 30vh;
-    background: pink;
+    background: ${props => props.back || PRIMARY_MAIN};
     padding: 3vw;
     position: relative;
     border-radius: 3vw;
-    border: 2px solid brown;
-    color: brown;
-`
-
-export const ModalInput = styled.input`
-    height: 3vh;
-    width: inherit;
-    padding-left: 3vw;
-    border-radius: 1vw;
-    border: 2px solid brown;
+    border: 2px solid ${PRIMARY_BACK};
+    color: ${props => props.color || PRIMARY_BACK};
 `

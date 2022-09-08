@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { PRIMARY_BACK } from '../../styles'
 
 export const LoginWrapper = styled.form`
     display: flex;
@@ -7,5 +8,5 @@ export const LoginWrapper = styled.form`
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    background: pink;
+    background: ${PRIMARY_BACK};
 `
