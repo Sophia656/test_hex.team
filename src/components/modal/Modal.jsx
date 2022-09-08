@@ -20,7 +20,7 @@ const Modal = ({title, username, setUsername, password, setPassword, btnText}) =
         <ModalWrapper color={register && PRIMARY_MAIN} back={register && PRIMARY_BACK}>
             <h2>{title}</h2>
             <Input height='true' type="text" placeholder='Введите логин...' value={username} onChange={(e) => setUsername(e.target.value)} />
-            <Input height='true' type="text" placeholder='Введите пароль...' value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Input height='true' type="password" placeholder='Введите пароль...' value={password} onChange={(e) => setPassword(e.target.value)} />
             <Button style={{minWidth: '20vw'}} onClick={e => handleFunc(e)}>{btnText}</Button>
         </ModalWrapper>
     );
