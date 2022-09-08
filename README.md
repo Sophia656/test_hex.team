@@ -1,4 +1,8 @@
-***https://sophia656.gihub.io/test_hex.team/***
+      git clone https://github.com/Sophia656/test_hex.team.git
+      npm i
+      npm start
+      login: jaja
+      pass: jaja
 
                 ### Требуется реализовать frontend часть сервиса сокращения ссылок.
 
