@@ -104,6 +104,8 @@ const MainPage = () => {
             .then(response => {
                 setAllLinks([...allLinks, {long: longLink, short: `http://79.143.31.216/s/${response.data.short}`, counter: response.data.counter, id: response.data.id}])
                 setLongLink('')
+                getAllCurrentPages()
+                getLinksInfo()
             })
         }
         setConverted(false)
