@@ -171,7 +171,7 @@ const MainPage = () => {
         onChangePageOrLimit(page, limit)
         onChangeSort()
         getLinksInfo()
-    }, [page, limit, sortByCounter, sortByLong, sortByShort])
+    }, [page, limit, converted, sortByCounter, sortByLong, sortByShort])
 
     // если добавляем новую ссылку/меняем страницу/лимит ---> сортировка на стороне сервера
     useEffect(() => {
