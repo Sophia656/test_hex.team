@@ -173,7 +173,7 @@ const MainPage = () => {
         getLinksInfo()
     }, [page, limit, sortByCounter, sortByLong, sortByShort])
 
-    // если добавляем новую ссылку/меняем страницу/лимит
+    // если добавляем новую ссылку/меняем страницу/лимит ---> сортировка на стороне сервера
     useEffect(() => {
         if (changePage || converted || changeLimit) {
             getLinksInfo() // получаем элем тек страницы
