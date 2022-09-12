@@ -1,42 +1,24 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { CellName, TableContentWrapper, TableCounter, TableLink, TableNames, TableRow, TableWrapper } from './styled';
 
-const Table = ({currentPageLinks, setCurrentPageLinks}) => {
-    const [sortByLong, setSortByLong] = useState(false)
-    const [sortByShort, setSortByShort] = useState(false)
-    const [sortByCounter, setSortByCounter] = useState(false)
-
-    const sortArr = useCallback(() => {
-        if (sortByCounter) {
-            setCurrentPageLinks(currentPageLinks.sort((a, b) => a.counter - b.counter))
-            return setSortByCounter(false)
-        }
-        if (sortByLong) {
-            setCurrentPageLinks(currentPageLinks.sort((a, b) => a.long.localeCompare(b.long)))
-            return setSortByLong(false)
-        }
-        if (sortByShort) {
-            setCurrentPageLinks(currentPageLinks.sort((a, b) => a.short.localeCompare(b.short)))
-            return setSortByShort(false)
-        }
-    }, [sortByCounter, sortByLong, sortByShort, currentPageLinks])
-
-    useEffect(() => {
-        if (sortByCounter || sortByLong || sortByShort) {
-            sortArr()
-        }
-    }, [sortByCounter, sortByLong, sortByShort])
+const Table = ({currentPageLinks,
+    sortByCounter, 
+    setSortByCounter, 
+    sortByLong, 
+    setSortByLong, 
+    sortByShort, 
+    setSortByShort}) => {
 
     return (
         <TableWrapper>
             <TableNames>
-                <CellName onClick={() => setSortByLong(true)}>
+                <CellName active={sortByLong} onClick={() => setSortByLong(!sortByLong)}>
                     Исходная ссылка
                 </CellName>
-                <CellName onClick={() => setSortByShort(true)}>
+                <CellName active={sortByShort} onClick={() => setSortByShort(!sortByShort)}>
                     Короткая ссылка
                 </CellName>
-                <CellName onClick={() => setSortByCounter(true)}>
+                <CellName active={sortByCounter} onClick={() => setSortByCounter(!sortByCounter)}>
                     Кол-во переходов
                 </CellName>
             </TableNames>

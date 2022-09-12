@@ -41,6 +41,10 @@ export const CellName = styled.div`
         background: ${PRIMARY_INPUT};
         color: ${PRIMARY_MAIN};
     }
+    ${props => props.active && `
+        background: ${PRIMARY_INPUT};
+        color: ${PRIMARY_MAIN};
+    `}
 `
 
 export const TableRow = styled.div`

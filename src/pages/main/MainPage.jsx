@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PaginationInput from '../../components/pagination-input/PaginationInput';
 import Pagination from '../../components/pagination/Pagination';
 import Table from '../../components/table/Table'
@@ -17,9 +17,16 @@ const MainPage = () => {
     const [currentPageLinks, setCurrentPageLinks] = useState([])
     const [limit, setLimit] = useLocalStorage('limit', 5);
     const [page, setPage] = useLocalStorage('page', 1);
+    // const [offset, setOffset] = useLocalStorage('offset', 0)
     const [allPages, setAllPages] = useState(0)
     const [changePage, setChangePage] = useState(false)
     const [changeLimit, setChangeLimit] = useState(false)
+    const [sortByLong, setSortByLong] = useState(false)
+    const [sortByShort, setSortByShort] = useState(false)
+    const [sortByCounter, setSortByCounter] = useState(false)
+
+    const url = new URL('http://79.143.31.216/statistics')
+    let params = new URLSearchParams(url.search)
 
     // получаем все имеюшиеся ссылки
     async function getAllCurrentPages() {
@@ -45,14 +52,6 @@ const MainPage = () => {
 
     // получаем конкретную страницу с ссылками
     async function getLinksInfo() {
-        let offset;
-        if (page === 1) {
-            offset = 0
-        } else if (page === 2){
-            offset = 5
-        } else {
-            offset = limit * (page - 1)
-        }
         await axios({
             method: 'GET',
             url: 'http://79.143.31.216/statistics',
@@ -61,7 +60,7 @@ const MainPage = () => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            params: {order: 'asc_short', offset: offset, limit: limit}
+            params: params,
         })
         .then(response => {
             const getlinks = []
@@ -71,20 +70,6 @@ const MainPage = () => {
             setCurrentPageLinks(getlinks)
         })
     }
-
-    useEffect(() => {
-        getAllCurrentPages()
-        getLinksInfo()
-    }, [])
-
-    useEffect(() => {
-        if (changePage || converted || changeLimit) {
-            getLinksInfo()
-            getAllCurrentPages()
-            setChangePage(false)
-            setChangeLimit(false)
-        }
-    }, [changePage, converted, changeLimit])
 
     // конвертация
     const squeeze = async (e) => {
@@ -111,6 +96,93 @@ const MainPage = () => {
         setConverted(false)
     }
 
+    // при первом запуске
+    useEffect(() => {
+        getAllCurrentPages() // получаем все элементы
+        params.append('offset', 0) // открываем 1 страницу
+        params.append('limit', 5) // дефолтный лимит - 5
+        getLinksInfo() // получаем элементы 1 страницы
+    }, [])
+
+    // меняем страницы
+    function onChangePageOrLimit(page, limit) {
+        const currentPage = page
+        const currentLimit = limit
+        let offset;
+        if (currentPage === 1) {
+            offset = 0
+        } else if (currentPage === 2){
+            offset = 5
+        } else {
+            offset = currentLimit * (currentPage - 1)
+        }
+        params.set('offset', offset)
+        params.set('limit', currentLimit)
+    }
+
+    // сортируем
+    function onChangeSort() {
+        let sort = []
+        // target - изначально | все - false | только по длинной
+        if ((!sortByCounter && !sortByLong && !sortByShort)
+        || (!sortByCounter && sortByLong && !sortByShort)) {
+            sort = ['asc_target']
+            params.delete('order', 'asc_short')
+            params.delete('order', 'asc_counter')
+        }
+        // если только по счетчику
+        if (sortByCounter && !sortByLong && !sortByShort) {
+            sort = ['asc_counter']
+            params.delete('order', 'asc_short')
+            params.delete('order', 'asc_target')
+        }
+        // если только по короткой
+        if (!sortByCounter && !sortByLong && sortByShort) {
+            sort = ['asc_short']
+            params.delete('order', 'asc_target')
+            params.delete('order', 'asc_counter')
+        }
+        // если по короткой и по длинной
+        if (!sortByCounter && sortByLong && sortByShort) {
+            sort = ['asc_short', 'asc_target']
+            params.delete('order', 'asc_counter')
+        }
+        // если по короткой и по счетчику
+        if (sortByCounter && !sortByLong && sortByShort) {
+            sort = ['asc_short', 'asc_counter']
+            params.delete('order', 'asc_target')
+        }
+        // если по длинной и по счетчику
+        if (sortByCounter && sortByLong && !sortByShort) {
+            sort = ['asc_target', 'asc_counter']
+            params.delete('order', 'asc_short')
+        }
+        // если по длинной и по короткой и по счетчику
+        if (sortByCounter && sortByLong && sortByShort) {
+            sort = ['asc_short', 'asc_target', 'asc_counter']
+        }
+        sort.forEach(i => {
+            params.append('order', i)
+        })
+    }
+    
+    // если меняется лимит/страница/сортировка:
+    useEffect(() => {
+        onChangePageOrLimit(page, limit)
+        onChangeSort()
+        getLinksInfo()
+    }, [page, limit, sortByCounter, sortByLong, sortByShort])
+
+    // если добавляем новую ссылку/меняем страницу/лимит
+    useEffect(() => {
+        if (changePage || converted || changeLimit) {
+            getLinksInfo() // получаем элем тек страницы
+            getAllCurrentPages() // все элем
+            setChangePage(false)
+            setChangeLimit(false)
+        }
+    }, [changePage, converted, changeLimit])
+
     const logout = () => {
         localStorage.clear()
         setIsAuth(!isAuth)
@@ -126,7 +198,16 @@ const MainPage = () => {
                 <Button onClick={e => squeeze(e)}>КОНВЕРТИРОВАТЬ</Button>
                 <PaginationInput allLinks={allLinks} setLimit={setLimit} setChangeLimit={setChangeLimit} />
             </MainForm>
-            <Table currentPageLinks={currentPageLinks} setCurrentPageLinks={setCurrentPageLinks} />
+            <Table 
+            currentPageLinks={currentPageLinks} 
+            setCurrentPageLinks={setCurrentPageLinks} 
+            sortByCounter={sortByCounter}
+            setSortByCounter={setSortByCounter}
+            sortByLong={sortByLong}
+            setSortByLong={setSortByLong}
+            sortByShort={sortByShort}
+            setSortByShort={setSortByShort}
+            />
             <Pagination allPages={allPages} page={page} setPage={setPage} setChangePage={setChangePage} />
         </MainWrapper>
     );
